@@ -1,240 +1,169 @@
-# CopyStructure - Media Library Backup Script
+# Enhanced Media Library Structure Copy Script
 
-A PowerShell script designed to backup media library folder structures while excluding large video files (.mkv and .mp4). Perfect for preserving metadata, subtitles, artwork, and other supporting files without consuming excessive storage space.
+A PowerShell script designed to replicate the directory structure of media libraries while selectively copying files and excluding large media files to save space and transfer time.
 
-## 📋 Overview
+## Overview
 
-This script creates a complete mirror of your media library's directory structure and copies all non-video files, making it ideal for:
-- Backing up Plex/Jellyfin/Emby metadata
-- Preserving subtitle files, artwork, and NFO files
-- Creating lightweight backups without large video files
-- Maintaining folder organization for later restoration
+This script is perfect for scenarios where you need to:
+- Back up your media library's organizational structure and metadata
+- Create a lightweight copy of your media collection for indexing or cataloging
+- Migrate folder structures without transferring large video/audio files
+- Preserve accompanying files like subtitles, thumbnails, and metadata while excluding the actual media
 
-## 🚀 Features
+## Features
 
-- **Interactive prompts** for source and destination directories
-- **Automatic directory creation** if destination doesn't exist
-- **Complete folder structure replication**
-- **Selective file copying** (excludes .mkv and .mp4 files)
-- **Progress tracking** with periodic status updates
-- **Error handling** for invalid paths
-- **Force overwrite** of existing files
+- **Selective File Copying**: Excludes large media files while preserving folder structure
+- **Comprehensive Format Support**: Recognizes and excludes various video, audio, disc image, and archive formats
+- **Interactive Setup**: Prompts for source and destination directories
+- **Progress Tracking**: Real-time progress updates during the copy process
+- **Statistics Display**: Shows file counts, sizes, and space savings
+- **Error Handling**: Gracefully handles copy failures with detailed error messages
+- **Automatic Directory Creation**: Creates destination directories as needed
 
-## 📋 Prerequisites
+## Excluded File Types
 
-- Windows PowerShell 5.1 or PowerShell Core 6.0+
-- Appropriate read permissions on source directory
-- Write permissions on destination directory (or parent folder for creation)
+The script automatically excludes the following file types:
 
-## 🛠️ Installation
+### Video Files
+- `.mkv`, `.mp4`, `.avi`, `.mov`, `.wmv`, `.flv`, `.webm`, `.m4v`, `.3gp`
+- `.mpg`, `.mpeg`, `.m2v`, `.ts`, `.mts`, `.m2ts`, `.vob`, `.ogv`, `.divx`
 
-1. Download the `copystructure.ps1` script
-2. Place it in a convenient location
-3. Ensure PowerShell execution policy allows script execution:
-   ```powershell
-   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-   ```
+### High-Quality Audio Files
+- `.flac`, `.ape`, `.wav`, `.dsd`, `.dsf`, `.dff`
 
-## 📖 Usage
+### Disc Images
+- `.iso`, `.img`, `.bin`, `.nrg`, `.mdf`, `.cue`
 
-### Basic Usage
+### Archives
+- `.zip`, `.rar`, `.7z`, `.tar`, `.gz`, `.bz2`
 
-1. Open PowerShell as Administrator (recommended)
-2. Navigate to the script location or provide full path
-3. Run the script:
+## What Gets Copied
+
+The script will copy files such as:
+- Subtitle files (`.srt`, `.sub`, `.vtt`, etc.)
+- Metadata files (`.nfo`, `.xml`, etc.)
+- Thumbnail and poster images (`.jpg`, `.png`, `.gif`, etc.)
+- Text files (`.txt`, `.md`, etc.)
+- Smaller audio files (`.mp3`, `.m4a`, `.ogg`, etc.)
+- Any other files not in the exclusion list
+
+## Usage
+
+### Prerequisites
+- Windows PowerShell 5.1 or PowerShell 7+
+- Read access to source directory
+- Write access to destination directory (or its parent for creation)
+
+### Running the Script
+
+1. **Download the script** to your local machine
+2. **Open PowerShell** as Administrator (recommended)
+3. **Navigate** to the script directory
+4. **Run the script**:
    ```powershell
    .\copystructure.ps1
    ```
-
-### Interactive Prompts
-
-The script will prompt you for:
-1. **Source directory path**: Your media library root folder
-2. **Destination directory path**: Where the backup should be created
+5. **Follow the prompts**:
+   - Enter the source directory path when prompted
+   - Enter the destination directory path when prompted
+6. **Monitor progress** as the script processes your media library
 
 ### Example Session
 
 ```
-PS C:\Scripts> .\copystructure.ps1
-Enter the source directory path: D:\MediaLibrary
-Enter the destination directory path: E:\Backup\MediaLibrary
-Creating destination directory: E:\Backup\MediaLibrary
+Enter the source directory path: C:\Media\Movies
+Enter the destination directory path: C:\Backup\Movies-Structure
 
 Excluded file types:
-  .3gp
   .7z
   .ape
   .avi
-  .bin
-  .bz2
-  .cue
-  .dff
-  .divx
-  .dsf
-  .dsd
-  .flac
-  .flv
-  .gz
-  .img
-  .iso
-  .m2ts
-  .m2v
-  .m4v
-  .mdf
-  .mkv
-  .mov
-  .mp4
-  .mpg
-  .mpeg
-  .mts
-  .nrg
-  .ogv
-  .rar
-  .tar
-  .ts
-  .vob
-  .wav
-  .webm
-  .wmv
-  .zip
+  [... full list displayed ...]
 
 Scanning directory structure...
 Creating directory structure...
-Creating directory: E:\Backup\MediaLibrary\Movies\Action
-Creating directory: E:\Backup\MediaLibrary\TV Shows\Drama
 Finding files to copy (excluding large media files)...
 
 File Statistics:
-  Files to copy: 1,250 (45.2 MB)
-  Files excluded: 850 (1.2 TB)
+  Files to copy: 1,247 (234.56 MB)
+  Files excluded: 423 (1.2 TB)
   Space saved: 1.2 TB
 
-Copying 1250 files...
-Copied 10 of 1250 files...
-Copied 20 of 1250 files...
-...
+Copying 1,247 files...
+Copied 10 of 1,247 files...
+Copied 20 of 1,247 files...
+[... progress continues ...]
+
 Directory structure and selected files copied successfully.
-Copied 1250 files from 'D:\MediaLibrary' to 'E:\Backup\MediaLibrary'
+Copied 1,247 files from 'C:\Media\Movies' to 'C:\Backup\Movies-Structure'
 Space saved by excluding large files: 1.2 TB
 ```
 
-## 📁 What Gets Copied
+## Use Cases
 
-### ✅ Included Files
-- Subtitle files (`.srt`, `.vtt`, `.ass`, etc.)
-- Metadata files (`.nfo`, `.xml`)
-- Image files (`.jpg`, `.png`, `.webp`, etc.)
-- Audio files (`.mp3`, `.flac`, etc.)
-- Text files (`.txt`, `.md`)
-- Configuration files
-- Any other non-video files
-
-### ❌ Excluded Files
-- `.mkv` files (Matroska Video)
-- `.mp4` files (MPEG-4 Video)
-
-## 🎯 Common Use Cases
-
-### Media Server Backup
-```
-Source: D:\Plex\Movies
-Destination: E:\Backups\Plex\Movies
-```
+### Media Library Backup
+Create a lightweight backup of your media organization without the storage overhead of actual video files.
 
 ### Migration Preparation
-```
-Source: \\NAS\MediaLibrary
-Destination: D:\Temp\MediaStructure
-```
+Prepare for media server migrations by copying folder structures and metadata while leaving large files for separate transfer.
 
-### Metadata Preservation
-```
-Source: C:\Users\User\Videos\Collection
-Destination: D:\Backup\VideoMetadata
-```
+### Cataloging and Indexing
+Generate a complete directory structure with metadata for cataloging purposes without requiring terabytes of storage.
 
-## ⚠️ Important Notes
+### Remote Synchronization
+Sync folder structures and small files to remote locations without bandwidth concerns.
 
-- **Disk Space**: While this script excludes large video files, ensure sufficient space for metadata and supporting files
-- **Permissions**: Run as Administrator if backing up system directories
-- **Network Drives**: Works with UNC paths (`\\server\share`) but may be slower
-- **Overwrite Behavior**: Existing files will be overwritten without confirmation
-- **Progress Updates**: Status shown every 10 copied files
+## Customization
 
-## 🔧 Customization
+### Modifying Excluded Extensions
 
-### Excluding Additional File Types
+To customize which file types are excluded, edit the `$ExcludedExtensions` array at the top of the script:
 
-To exclude more file types, modify line 32:
 ```powershell
-# Current
-$files = Get-ChildItem -Path $SourceDirectory -File -Recurse | Where-Object { $_.Extension -ne ".mkv" -and $_.Extension -ne ".mp4" }
-
-# Add more exclusions
-$files = Get-ChildItem -Path $SourceDirectory -File -Recurse | Where-Object { 
-    $_.Extension -ne ".mkv" -and 
-    $_.Extension -ne ".mp4" -and 
-    $_.Extension -ne ".avi" -and 
-    $_.Extension -ne ".mov" 
-}
+$ExcludedExtensions = @(
+    # Add or remove extensions as needed
+    ".your_extension_here"
+)
 ```
 
-### Changing Progress Update Frequency
+### Including High-Quality Audio
 
-Modify line 48 to change how often progress is displayed:
+If you want to include high-quality audio files like FLAC, remove them from the exclusion list:
+
 ```powershell
-# Update every 50 files instead of 10
-if ($copiedFiles % 50 -eq 0) {
+# Comment out or remove these lines:
+# ".flac", ".ape", ".wav", ".dsd", ".dsf", ".dff",
 ```
 
-## 🐛 Troubleshooting
+## Error Handling
 
-### Common Issues
+The script includes robust error handling:
+- Validates source directory existence before proceeding
+- Creates destination directories automatically
+- Reports individual file copy failures without stopping the entire process
+- Provides detailed error messages for troubleshooting
 
-**"Source directory does not exist"**
-- Verify the path is correct and accessible
-- Check for typos in the path
-- Ensure you have read permissions
+## Performance Considerations
 
-**"Access denied"**
-- Run PowerShell as Administrator
-- Check folder permissions
-- Verify destination drive has sufficient space
+- **Large Libraries**: For very large media libraries (10,000+ files), the initial scan may take several minutes
+- **Network Drives**: Performance may be slower when working with network-attached storage
+- **Progress Updates**: Progress is displayed every 10 files to balance information and performance
 
-**Script won't run**
-- Check PowerShell execution policy: `Get-ExecutionPolicy`
-- Set appropriate policy: `Set-ExecutionPolicy RemoteSigned`
+## Requirements
 
-### Performance Tips
+- **Operating System**: Windows 10/11 or Windows Server 2016+
+- **PowerShell**: Version 5.1 or later
+- **Permissions**: Read access to source, write access to destination
+- **Storage**: Sufficient space in destination for small files and folder structure
 
-- Use local drives when possible for better performance
-- Close other applications that might lock files
-- Consider running during off-peak hours for large libraries
+## Contributing
 
-## 📊 Output Information
+Feel free to submit issues, feature requests, or pull requests to improve the script functionality.
 
-The script provides detailed feedback including:
-- Directory creation confirmations
-- File copy progress updates
-- Final summary with total files copied
-- Source and destination paths confirmation
+## License
 
-## 🤝 Contributing
+This script is provided as-is for personal and commercial use. Modify and distribute freely.
 
-Feel free to fork this script and submit improvements! Common enhancement areas:
-- GUI interface
-- Configuration file support
-- Additional file type filtering options
-- Resume capability for interrupted operations
-- Logging to file
+---
 
-## 📄 License
-
-This script is provided as-is for educational and personal use. Modify and distribute freely.
-
-## 📞 Support
-
-For issues or questions:
-1. Check the troubleshooting section above
-2. Verify your PowerShell version and permissions
-3. Test with a small sample directory first
+**Note**: Always test the script on a small subset of your media library before running it on your entire collection to ensure it meets your specific needs.
