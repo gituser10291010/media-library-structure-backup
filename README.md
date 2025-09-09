@@ -70,37 +70,6 @@ The script will copy all other files such as:
    - Enter the destination directory path when prompted
 6. **Monitor progress** as the script processes your media library
 
-### Example Session
-
-```
-Enter the source directory path: C:\Media\Movies
-Enter the destination directory path: C:\Backup\Movies-Structure
-
-Excluded file types:
-  .7z
-  .ape
-  .avi
-  [... full list displayed ...]
-
-Scanning directory structure...
-Creating directory structure...
-Finding files to copy (excluding large media files)...
-
-File Statistics:
-  Files to copy: 1,247 (234.56 MB)
-  Files excluded: 423 (1.2 TB)
-  Space saved: 1.2 TB
-
-Copying 1,247 files...
-Copied 10 of 1,247 files...
-Copied 20 of 1,247 files...
-[... progress continues ...]
-
-Directory structure and selected files copied successfully.
-Copied 1,247 files from 'C:\Media\Movies' to 'C:\Backup\Movies-Structure'
-Space saved by excluding large files: 1.2 TB
-```
-
 ## Use Cases
 
 ### Media Library Backup
