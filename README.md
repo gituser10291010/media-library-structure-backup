@@ -1,6 +1,7 @@
 # Enhanced Media Library Structure Copy Script
 
 A PowerShell script designed to replicate the directory structure of media libraries while selectively copying files and excluding large media files to save space and transfer time.  
+
 This script will copy all files/types in the folder structure unless specifically excluded, default exclusions listed below.
 
 ## Overview
