@@ -41,7 +41,7 @@ The script automatically excludes the following file types:
 
 ## What Gets Copied
 
-The script will copy files such as:
+The script will copy all other files such as:
 - Subtitle files (`.srt`, `.sub`, `.vtt`, etc.)
 - Metadata files (`.nfo`, `.xml`, etc.)
 - Thumbnail and poster images (`.jpg`, `.png`, `.gif`, etc.)
