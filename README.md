@@ -59,17 +59,63 @@ PS C:\Scripts> .\copystructure.ps1
 Enter the source directory path: D:\MediaLibrary
 Enter the destination directory path: E:\Backup\MediaLibrary
 Creating destination directory: E:\Backup\MediaLibrary
+
+Excluded file types:
+  .3gp
+  .7z
+  .ape
+  .avi
+  .bin
+  .bz2
+  .cue
+  .dff
+  .divx
+  .dsf
+  .dsd
+  .flac
+  .flv
+  .gz
+  .img
+  .iso
+  .m2ts
+  .m2v
+  .m4v
+  .mdf
+  .mkv
+  .mov
+  .mp4
+  .mpg
+  .mpeg
+  .mts
+  .nrg
+  .ogv
+  .rar
+  .tar
+  .ts
+  .vob
+  .wav
+  .webm
+  .wmv
+  .zip
+
 Scanning directory structure...
 Creating directory structure...
 Creating directory: E:\Backup\MediaLibrary\Movies\Action
 Creating directory: E:\Backup\MediaLibrary\TV Shows\Drama
-Finding non-video files to copy...
+Finding files to copy (excluding large media files)...
+
+File Statistics:
+  Files to copy: 1,250 (45.2 MB)
+  Files excluded: 850 (1.2 TB)
+  Space saved: 1.2 TB
+
 Copying 1250 files...
 Copied 10 of 1250 files...
 Copied 20 of 1250 files...
 ...
-Directory structure and non-video files copied successfully.
+Directory structure and selected files copied successfully.
 Copied 1250 files from 'D:\MediaLibrary' to 'E:\Backup\MediaLibrary'
+Space saved by excluding large files: 1.2 TB
 ```
 
 ## 📁 What Gets Copied
